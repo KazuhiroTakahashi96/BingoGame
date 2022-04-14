@@ -3,3 +3,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  text-align: center;
+}
+
+header {
+  font-size: 25px;
+  margin: 30px;
+  font-weight: bold;
+}
+
+.container {
+  font-size: 20px;
+  display: flex;
+}
