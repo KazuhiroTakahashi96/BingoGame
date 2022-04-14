@@ -11,7 +11,7 @@
     <header>BINGO GAME</header>
 
     <div class="container">
-      <div>
+      <div class="table-div">
         <table>
           <thead>
             <tr>
@@ -64,11 +64,23 @@
       </div>
 
       <div>
-        <div>ボールの数字：</div>
+        <div>リーチ数</div>
+        <div id="reach-num">3</div>
         <br />
-        <div>リーチ数：</div>
-        <div>ビンゴ数：</div>
+        <div>ビンゴ数</div>
+        <div id="bingo-num">3</div>
       </div>
+
+      <div>
+        <div>ボールの数字</div>
+        <br />
+        <div id="ball-num"></div>
+      </div>
+    </div>
+
+    <div class="btn">
+      <input type="button" id="reset-btn" value="リセット" />
+      <input type="button" id="ball-btn" value="ボールを引く" />
     </div>
 
     <script src="script.js"></script>

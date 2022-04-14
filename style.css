@@ -17,4 +17,24 @@ header {
 .container {
   font-size: 20px;
   display: flex;
+  justify-content: space-evenly;
+}
+.table-div {
+  width: 33vw;
+  margin: 0;
+}
+table {
+  height: 250px;
+  width: 250px;
+}
+
+.btn {
+  margin-top: 40px;
+}
+.btn > input {
+  width: 100px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
 }
