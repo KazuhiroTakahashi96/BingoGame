@@ -24,15 +24,20 @@ header {
   margin: 0 30px;
 }
 table {
-  /* height: 250px;
-  width: 250px; */
-  margin: 0 auto;
+  height: 300px;
+  width: 90%;
 }
 
 th,
 td {
-  /* margin:  5px; */
-  padding: 10px;
+  margin: 5px;
+  padding: 0 10px 10px;
+}
+#reach-num,
+#bingo-num,
+#ball-num {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .btn {
@@ -50,4 +55,8 @@ td {
 .matched-num {
   background-color: gold;
   border-radius: 20px 20px 0 0;
+}
+
+#ball-btn {
+  display: none;
 }

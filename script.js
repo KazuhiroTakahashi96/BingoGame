@@ -16,6 +16,7 @@ const col_O = document.querySelectorAll(".col-O");
 
 // 全td要素（ビンゴカードの数字）の取得
 const td = document.querySelectorAll("td");
+// console.log(td);
 
 //==================== ビンゴカードの作成 ====================
 class BingoCard {
@@ -34,6 +35,9 @@ class BingoBallNumber {
   }
 }
 
+//
+//
+//
 //======================== ボタンアクション ========================
 // === ビンゴカード作成ボタン ===
 createBtn.addEventListener("click", () => {
@@ -43,28 +47,17 @@ createBtn.addEventListener("click", () => {
   showBingoCard();
 });
 
-// === ビンゴボールを引くボタン ===
+// === ビンゴボールを引く（数字を表示する）ボタン ===
 ballBtn.addEventListener("click", () => {
-  let ballNumArray = [];
-  for (let i = 1; i <= 75; i++) {
-    ballNumArray.push(i);
-  }
-  console.log(ballNumArray);
-
-  const randomNum = Math.floor(Math.random() * 75) + 1;
-  console.log(randomNum);
-
-  let numArr = ballNumArray;
-  if (numArr.includes(randomNum)) {
-    console.log("success");
-    ballNum.innerHTML = randomNum;
-  }
+  makeBingoBall();
 });
 
 // === リセットボタン ===
 resetBtn.addEventListener("click", () => {});
 
-// =============ビンゴカードの数字を作成する関数============
+//
+//
+// ================= ビンゴカードの数字を作成する関数 ===============
 function makeRandomNum(plus) {
   let array = [];
   for (let i = 0; i < 15; i++) {
@@ -82,8 +75,9 @@ function makeRandomNum(plus) {
   return numArray;
 }
 
-// ==================上で作成した数字を出力する関数===================
+// ================= 上で作成した数字を出力する関数 ==================
 function showBingoCard() {
+  // 上の関数で作成したランダムな数字を、それぞれ変数に格納
   const B_Num = makeRandomNum(1);
   const I_Num = makeRandomNum(16);
   const N_Num = makeRandomNum(31);
@@ -100,4 +94,25 @@ function showBingoCard() {
   }
   // 中央は常に'free'
   col_N[2].innerHTML = "free";
+}
+
+// ============= ビンゴボール（数字）を作成する関数 ===============
+const bingoBallArray = [];
+for (let i = 0; i < 75; i++) {
+  bingoBallArray.push(i);
+}
+const ballNumArray = [];
+
+function makeBingoBall() {
+  // ランダムな値を取得
+  let randomNum = Math.floor(Math.random() * bingoBallArray.length);
+  ballNumArray.unshift(bingoBallArray[randomNum] + 1);
+  // 数字が重複しないよう、元の配列から削除
+  bingoBallArray.splice(randomNum, 1);
+
+  console.log(bingoBallArray);
+  console.log(ballNumArray);
+
+  ballNum.innerHTML = ballNumArray[0];
+  // return ballNumArray;
 }
