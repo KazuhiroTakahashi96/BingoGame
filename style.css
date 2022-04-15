@@ -15,17 +15,24 @@ header {
 }
 
 .container {
-  font-size: 20px;
+  /* font-size: 15px; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .table-div {
-  width: 33vw;
-  margin: 0;
+  width: 30vw;
+  margin: 0 30px;
 }
 table {
-  height: 250px;
-  width: 250px;
+  /* height: 250px;
+  width: 250px; */
+  margin: 0 auto;
+}
+
+th,
+td {
+  /* margin:  5px; */
+  padding: 10px;
 }
 
 .btn {
@@ -38,4 +45,9 @@ table {
   border-radius: 10px;
   cursor: pointer;
   margin: 10px 10px;
+}
+
+.matched-num {
+  background-color: gold;
+  border-radius: 20px 20px 0 0;
 }
