@@ -1,3 +1,4 @@
+// 要素取得
 const reachNum = document.querySelector("#reach-num");
 const bingoNum = document.querySelector("#bingo-num");
 const ballNum = document.querySelector("#ball-num");
@@ -18,44 +19,24 @@ const col_O = document.querySelectorAll(".col-O");
 const td = document.querySelectorAll("td");
 // console.log(td);
 
-//==================== ビンゴカードの作成 ====================
+//==================== ビンゴカードの作成クラス ====================
 class BingoCard {
   constructor() {}
 }
 
-//================= ビンゴボール（数字）の取り出し =================
+//=============== ビンゴボール（数字）の取り出しクラス ===============
 class BingoBallNumber {
   constructor() {
-    console.log("ビンゴボールの取り出し");
-  }
-
-  makeClass() {
-    const bingoCaed = new BingoCard();
-    console.log(bingoCaed);
+    console.log("ビンゴボールクラスの取り出し");
   }
 }
 
 //
-//
-//
-//======================== ボタンアクション ========================
-// === ビンゴカード作成ボタン ===
-createBtn.addEventListener("click", () => {
-  const card = new BingoCard();
-  console.log(card);
+// ========= ボールの数字とカード上の数字のチェックをする関数 =========
+function checkingNumber(cardNum) {
+  console.log(cardNum);
+}
 
-  showBingoCard();
-});
-
-// === ビンゴボールを引く（数字を表示する）ボタン ===
-ballBtn.addEventListener("click", () => {
-  makeBingoBall();
-});
-
-// === リセットボタン ===
-resetBtn.addEventListener("click", () => {});
-
-//
 //
 // ================= ビンゴカードの数字を作成する関数 ===============
 function makeRandomNum(plus) {
@@ -75,14 +56,20 @@ function makeRandomNum(plus) {
   return numArray;
 }
 
+//
 // ================= 上で作成した数字を出力する関数 ==================
-function showBingoCard() {
+function makeBingoCard() {
   // 上の関数で作成したランダムな数字を、それぞれ変数に格納
   const B_Num = makeRandomNum(1);
   const I_Num = makeRandomNum(16);
   const N_Num = makeRandomNum(31);
   const G_Num = makeRandomNum(46);
   const O_Num = makeRandomNum(61);
+  const bingoCardNumber = B_Num.concat(I_Num)
+    .concat(N_Num)
+    .concat(G_Num)
+    .concat(O_Num);
+  checkingNumber(bingoCardNumber);
 
   // 数字を画面に出力
   for (let i = 0; i < 5; i++) {
@@ -94,8 +81,10 @@ function showBingoCard() {
   }
   // 中央は常に'free'
   col_N[2].innerHTML = "free";
+  col_N[2].ariaChecked = "true";
 }
 
+//
 // ============= ビンゴボール（数字）を作成する関数 ===============
 const bingoBallArray = [];
 for (let i = 0; i < 75; i++) {
@@ -114,5 +103,32 @@ function makeBingoBall() {
   console.log(ballNumArray);
 
   ballNum.innerHTML = ballNumArray[0];
-  // return ballNumArray;
 }
+
+//
+//
+//
+//
+//
+//======================== クリックイベント ========================
+// === ビンゴカード作成ボタン ===
+createBtn.addEventListener("click", () => {
+  const card = new BingoCard();
+  console.log(card);
+
+  makeBingoCard();
+  createBtn.classList.add("hide");
+  ballBtn.classList.remove("hide");
+  resetBtn.classList.remove("hide");
+});
+
+//
+// === ビンゴボールを引く（数字を表示する）ボタン ===
+ballBtn.addEventListener("click", () => {
+  makeBingoBall();
+  checkingNumber();
+});
+
+//
+// === リセットボタン ===
+resetBtn.addEventListener("click", () => {});
