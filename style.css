@@ -36,12 +36,14 @@ td {
 }
 
 span {
+  font-size: 25px;
   font-weight: bold;
 }
 
 #reach-num,
 #bingo-num,
-#ball-num {
+#ball-num,
+#end {
   font-size: 30px;
   font-weight: bold;
 }

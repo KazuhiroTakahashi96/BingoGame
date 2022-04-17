@@ -3,11 +3,11 @@ const reachNum = document.querySelector("#reach-num");
 const bingoNum = document.querySelector("#bingo-num");
 const ballNum = document.querySelector("#ball-num");
 const span = document.querySelector("span");
+const end = document.querySelector("#end");
 
 // ボタン取得
 const createBtn = document.querySelector("#create-btn");
 const ballBtn = document.querySelector("#ball-btn");
-const resetBtn = document.querySelector("#reset-btn");
 
 // B, I, N, G, O 列の取得（縦列）
 const col_B = document.querySelectorAll(".col-B");
@@ -28,10 +28,6 @@ const row_5 = document.querySelectorAll(".row-5");
 const cross1 = document.querySelectorAll(".cross1");
 const cross2 = document.querySelectorAll(".cross2");
 
-// 全td要素（ビンゴカードの数字）の取得
-const td = document.querySelectorAll("td");
-// console.log(td);
-
 // ==============================================================
 // =============== ビンゴボール（数字）の取り出しクラス ===============
 // ==============================================================
@@ -45,14 +41,14 @@ class BingoBallNumber {
     // ビンゴボールの数字を格納する配列の作成
     this.ballNumArray = [];
 
-    // 何回ボールを引いたか
+    // 何個目のボールか（初期値＝1）
     this.ball = 1;
   }
 
   // ============= ビンゴボールの数字を作成する関数 ============
   makeBingoBall() {
     // n個目のボール
-    span.innerHTML = `${this.ball}`;
+    span.innerHTML = this.ball;
     this.ball = this.ball + 1;
 
     // 0〜74の中で、ランダムな値を取得
@@ -61,15 +57,14 @@ class BingoBallNumber {
     this.ballNumArray.unshift(this.bingoBallArray[randomNum] + 1);
     // 数字が重複しないよう、元の配列から削除
     this.bingoBallArray.splice(randomNum, 1);
-    console.log(this.bingoBallArray);
-    console.log(this.ballNumArray);
 
     // 画面に数字を表示
     if (this.bingoBallArray.length == 0) {
       ballNum.innerHTML = this.ballNumArray[0];
+      ballBtn.classList.add("hide");
       setTimeout(() => {
-        ballNum.innerHTML = "終了";
-      }, 1000);
+        end.innerHTML = "終了";
+      }, 1500);
     } else {
       ballNum.innerHTML = this.ballNumArray[0];
     }
@@ -95,6 +90,7 @@ class BingoBallNumber {
   checkReachNum(el) {
     let reachNum = 0;
     for (let i = 0; i < 5; i++) {
+      // true(穴が空いてる)なら
       if (el[i].ariaChecked === "true") {
         reachNum += 1;
       }
@@ -105,6 +101,7 @@ class BingoBallNumber {
   checkBingoNum(el) {
     let bingoNum = 0;
     for (let i = 0; i < 5; i++) {
+      // true(穴が空いてる)なら
       if (el[i].ariaChecked === "true") {
         bingoNum += 1;
       }
@@ -112,11 +109,10 @@ class BingoBallNumber {
     return bingoNum / 5 === 1 ? 1 : 0;
   }
 
-  // 画面に出力する関数
+  // ==== 画面に出力する関数 ====
   showReachBing() {
     // リーチ数
-    let totalReachNumber = 0;
-    totalReachNumber =
+    const totalReachNumber =
       this.checkReachNum(col_B) +
       this.checkReachNum(col_I) +
       this.checkReachNum(col_N) +
@@ -130,9 +126,8 @@ class BingoBallNumber {
       this.checkReachNum(cross1) +
       this.checkReachNum(cross2);
 
-    // ビンゴ2row_5
-    let totalBingoNumber = 0;
-    totalBingoNumber =
+    // ビンゴ数
+    const totalBingoNumber =
       this.checkBingoNum(col_B) +
       this.checkBingoNum(col_I) +
       this.checkBingoNum(col_N) +
@@ -212,15 +207,9 @@ createBtn.addEventListener("click", () => {
 
   createBtn.classList.add("hide");
   ballBtn.classList.remove("hide");
-  resetBtn.classList.remove("hide");
 });
 
-//
 // ========= ビンゴボールを引く（数字を表示する）ボタン =========
 ballBtn.addEventListener("click", () => {
   bingoBallNumber.makeBingoBall();
 });
-
-//
-// ========= リセットボタン =========
-resetBtn.addEventListener("click", () => {});
