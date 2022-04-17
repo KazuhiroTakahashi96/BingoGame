@@ -14,6 +14,8 @@ const col_I = document.querySelectorAll(".col-I");
 const col_N = document.querySelectorAll(".col-N");
 const col_G = document.querySelectorAll(".col-G");
 const col_O = document.querySelectorAll(".col-O");
+const col_BINGO = [...col_B, ...col_I, ...col_N, ...col_G, ...col_O];
+console.log(col_BINGO);
 
 // 全td要素（ビンゴカードの数字）の取得
 const td = document.querySelectorAll("td");
@@ -21,7 +23,6 @@ const td = document.querySelectorAll("td");
 
 // ==============================================================
 // ==============================================================
-
 //=============== ビンゴボール（数字）の取り出しクラス ===============
 class BingoBallNumber {
   constructor() {
@@ -43,33 +44,34 @@ class BingoBallNumber {
     // 数字が重複しないよう、元の配列から削除
     this.bingoBallArray.splice(randomNum, 1);
 
-    console.log(this.ballNumArray);
-    console.log(this.bingoBallArray);
-
     // 画面に数字を表示
     if (this.bingoBallArray.length === 0) {
       ballNum.innerHTML = "終了";
     } else {
       ballNum.innerHTML = this.ballNumArray[0];
     }
+
+    this.checkNumber();
+  }
+
+  // =========== ボールの数字とカード上の数字のチェックをして =============
+  // ======== 一致した場合、カード上のその数字をハイライトする関数 =========
+  checkNumber() {
+    // 引いた数字の値がカード上にある場合、
+    if (bingoCard.cardNumArray.includes(this.ballNumArray[0])) {
+      // インデックス番号を取得する
+      const indexNum = bingoCard.cardNumArray.indexOf(this.ballNumArray[0]);
+      // 背景色を変える＝穴を開ける
+      col_BINGO[indexNum].ariaChecked = "true";
+    }
   }
 }
 
-const bingoBallNumber = new BingoBallNumber();
-console.log(bingoBallNumber);
-
-//
-//
-//
+// ==============================================================
+// ==============================================================
 //==================== ビンゴカードの作成クラス ====================
 class BingoCard {
   constructor() {
-    // 0〜14を持った長さ15の配列の作成
-    // this.array = [];
-    // for (let i = 0; i < 15; i++) {
-    //   this.array.push(i);
-    // }
-
     // ビンゴカードの数字を格納する配列
     this.cardNumArray = [];
   }
@@ -117,26 +119,17 @@ class BingoCard {
   }
 }
 
-const bingoCard = new BingoCard();
-
-//
-//
 // ============= リーチ数とビンゴ数をチェックする関数 ===============
 function checkingReachBingo() {}
 
-//
-//
-// ========= ボールの数字とカード上の数字のチェックをする関数 =========
-function checkingNumber() {}
+// ====================== インスタンス化 ======================
+const bingoBallNumber = new BingoBallNumber();
+const bingoCard = new BingoCard();
 
-//
-//
-//
 //======================== クリックイベント ========================
 // ========= ビンゴカード作成ボタン =========
 createBtn.addEventListener("click", () => {
   bingoCard.makeBingoCard();
-  console.log(bingoCard.cardNumArray);
 
   createBtn.classList.add("hide");
   ballBtn.classList.remove("hide");

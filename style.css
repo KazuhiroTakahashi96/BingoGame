@@ -23,8 +23,8 @@ header {
   margin: 0 30px;
 }
 table {
-  height: 300px;
   width: 80%;
+  height: 300px;
   font-size: 20px;
 }
 
@@ -54,10 +54,6 @@ td {
   margin: 10px 10px;
 }
 
-/* .matched-num {
-  background-color: gold;
-  border-radius: 20px 20px 0 0;
-} */
 [aria-checked="true"] {
   background-color: gold;
   border-radius: 20px 20px 0 0;
