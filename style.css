@@ -32,7 +32,11 @@ th {
   padding-bottom: 5px;
 }
 td {
-  padding: 18px;
+  padding: 15px;
+}
+
+span {
+  font-weight: bold;
 }
 
 #reach-num,
