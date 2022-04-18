@@ -28,17 +28,20 @@ const row_5 = document.querySelectorAll(".row-5");
 const cross1 = document.querySelectorAll(".cross1");
 const cross2 = document.querySelectorAll(".cross2");
 
+// 配列のメソッドについて
+// https://ja.javascript.info/array-methods
+
 // ==============================================================
 // =============== ビンゴボール（数字）の取り出しクラス ===============
 // ==============================================================
 class BingoBallNumber {
   constructor() {
-    // 0〜74を持った長さ75の配列の作成
+    // 1〜75を持った長さ75の配列の作成
     this.bingoBallArray = [];
-    for (let i = 0; i < 75; i++) {
+    for (let i = 1; i <= 75; i++) {
       this.bingoBallArray.push(i);
     }
-    // ビンゴボールの数字を格納する配列の作成
+    // 出たビンゴボールの数字を格納していく配列の作成
     this.ballNumArray = [];
 
     // 何個目のボールか（初期値＝1）
@@ -53,8 +56,7 @@ class BingoBallNumber {
 
     // 0〜74の中で、ランダムな値を取得
     const randomNum = Math.floor(Math.random() * this.bingoBallArray.length);
-    // 上記で取得したランダムな数字に1を足して、配列に格納
-    this.ballNumArray.unshift(this.bingoBallArray[randomNum] + 1);
+    this.ballNumArray.unshift(this.bingoBallArray[randomNum]);
     // 数字が重複しないよう、元の配列から削除
     this.bingoBallArray.splice(randomNum, 1);
 
@@ -73,7 +75,7 @@ class BingoBallNumber {
   }
 
   // =========== ボールの数字とカード上の数字のチェックをして =============
-  // ======== 一致した場合、カード上のその数字をハイライトする関数 =========
+  // ======== 一致した場合、カード上のその数字の背景色を変更する関数 =========
   checkNumber() {
     // 引いた数字の値がカード上にある場合、
     if (bingoCard.cardNumArray.includes(this.ballNumArray[0])) {
@@ -157,9 +159,9 @@ class BingoCard {
 
   // =========== ビンゴカードの数字を作成する関数 ===========
   makeRandomNum(plus) {
-    // 0〜14を持った長さ15の配列の作成
+    // 1〜15を持った長さ15の配列の作成
     const array = [];
-    for (let i = 0; i < 15; i++) {
+    for (let i = 1; i <= 15; i++) {
       array.push(i);
     }
 
@@ -176,11 +178,11 @@ class BingoCard {
   // =========== 上で作成した数字を出力する関数 ============
   makeBingoCard() {
     // 上の関数で作成したランダムな数字を、それぞれ変数に格納
-    const B_Num = this.makeRandomNum(1);
-    const I_Num = this.makeRandomNum(16);
-    const N_Num = this.makeRandomNum(31);
-    const G_Num = this.makeRandomNum(46);
-    const O_Num = this.makeRandomNum(61);
+    const B_Num = this.makeRandomNum(0);
+    const I_Num = this.makeRandomNum(15);
+    const N_Num = this.makeRandomNum(30);
+    const G_Num = this.makeRandomNum(45);
+    const O_Num = this.makeRandomNum(60);
 
     // 数字を画面に出力
     for (let i = 0; i < 5; i++) {
@@ -190,7 +192,7 @@ class BingoCard {
       col_G[i].innerHTML = G_Num[i + 15];
       col_O[i].innerHTML = O_Num[i + 20];
     }
-    // 中央は常に'free'
+    // 中央は常に'free'、穴が空いている(=true)状態
     col_N[2].innerHTML = "free";
     col_N[2].ariaChecked = "true";
   }
