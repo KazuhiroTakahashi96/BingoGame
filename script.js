@@ -89,6 +89,7 @@ class BingoBallNumber {
   }
 
   // ========== リーチ数、ビンゴ数をチェック、出力する関数 ============
+  // ===== リーチ数をチェックする関数 =====
   checkReachNum(el) {
     let reachNum = 0;
     for (let i = 0; i < 5; i++) {
@@ -100,6 +101,7 @@ class BingoBallNumber {
     return reachNum / 4 === 1 ? 1 : 0;
   }
 
+  // ===== ビンゴ数をチェックする関数 =====
   checkBingoNum(el) {
     let bingoNum = 0;
     for (let i = 0; i < 5; i++) {
@@ -111,7 +113,7 @@ class BingoBallNumber {
     return bingoNum / 5 === 1 ? 1 : 0;
   }
 
-  // ==== 画面に出力する関数 ====
+  // ===== 画面に出力する関数 =====
   showReachBing() {
     // リーチ数
     const totalReachNumber =
@@ -172,26 +174,22 @@ class BingoCard {
       // 数字が重複しないよう、元の配列から削除
       array.splice(randomNum, 1);
     }
-    return this.cardNumArray;
   }
 
   // =========== 上で作成した数字を出力する関数 ============
   makeBingoCard() {
-    // 上の関数で作成したランダムな数字を、それぞれ変数に格納
-    const B_Num = this.makeRandomNum(0);
-    const I_Num = this.makeRandomNum(15);
-    const N_Num = this.makeRandomNum(30);
-    const G_Num = this.makeRandomNum(45);
-    const O_Num = this.makeRandomNum(60);
+    // カードの各列に入るランダムな数字を作る
+    this.makeRandomNum(0);
+    this.makeRandomNum(15);
+    this.makeRandomNum(30);
+    this.makeRandomNum(45);
+    this.makeRandomNum(60);
 
     // 数字を画面に出力
-    for (let i = 0; i < 5; i++) {
-      col_B[i].innerHTML = B_Num[i];
-      col_I[i].innerHTML = I_Num[i + 5];
-      col_N[i].innerHTML = N_Num[i + 10];
-      col_G[i].innerHTML = G_Num[i + 15];
-      col_O[i].innerHTML = O_Num[i + 20];
-    }
+    col_BINGO.map((el, i) => {
+      el.innerHTML = this.cardNumArray[i];
+    });
+
     // 中央は常に'free'、穴が空いている(=true)状態
     col_N[2].innerHTML = "free";
     col_N[2].ariaChecked = "true";
