@@ -52,7 +52,7 @@ class BingoBallNumber {
   makeBingoBall() {
     // n個目のボール
     span.innerHTML = this.ball;
-    this.ball = this.ball + 1;
+    this.ball += 1;
 
     // 0〜74の中で、ランダムな値を取得
     const randomNum = Math.floor(Math.random() * this.bingoBallArray.length);
@@ -98,7 +98,7 @@ class BingoBallNumber {
         reachNum += 1;
       }
     }
-    return reachNum / 4 === 1 ? 1 : 0;
+    return reachNum === 4 ? 1 : 0;
   }
 
   // ===== ビンゴ数をチェックする関数 =====
@@ -110,7 +110,7 @@ class BingoBallNumber {
         bingoNum += 1;
       }
     }
-    return bingoNum / 5 === 1 ? 1 : 0;
+    return bingoNum === 5 ? 1 : 0;
   }
 
   // ===== 画面に出力する関数 =====
